@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    tools {
+    //tools {
         // Use the specified versions of Maven and Docker
-        maven 'Maven_3.8.1'   // Replace 'Maven_3.8.1' with the actual name configured in Jenkins global tool configuration
-        docker 'Docker'   // Replace 'Docker' with the Docker tool name configured in Jenkins global tool configuration
-    }
+        //maven 'Maven_3.8.1'   // Replace 'Maven_3.8.1' with the actual name configured in Jenkins global tool configuration
+        //docker 'Docker'   // Replace 'Docker' with the Docker tool name configured in Jenkins global tool configuration
+    //}
 
     environment {
         DOCKER_HUB_REPO = 'rajnages/todoapp' // Replace with your DockerHub repo
