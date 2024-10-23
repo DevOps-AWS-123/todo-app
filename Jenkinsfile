@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    //tools {
-        // Use the specified versions of Maven and Docker
-        //maven 'Maven_3.8.1'   // Replace 'Maven_3.8.1' with the actual name configured in Jenkins global tool configuration
-        //docker 'Docker'   // Replace 'Docker' with the Docker tool name configured in Jenkins global tool configuration
-    //}
+    tools {
+      maven 'maven'
+      docker 'docker'
+    }
+
 
     environment {
         DOCKER_HUB_REPO = 'rajnages/todoapp' // Replace with your DockerHub repo
@@ -18,7 +18,7 @@ pipeline {
                 git 'https://github.com/DevOps-AWS-123/todo-app.git' // Replace with your repo URL
             }
         }
-
+        
         stage('Build with Maven') {
             steps {
                 sh 'mvn clean package'
@@ -49,7 +49,7 @@ pipeline {
             }
         }
 
-        // Optional: Deploy to Docker Host
+        // Optional: Deploy to a Docker Host (You can customize this step to suit your needs)
         stage('Deploy to Docker') {
             steps {
                 sh '''
