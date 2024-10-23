@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>To-Do List</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5a623, #f76b1c);
+        }
+
+        /* Container Styling */
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1c87c9;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f76b1c;
+            transform: scale(1.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        li {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        li span {
+            font-size: 1.2rem;
+        }
+
+        form button {
+            background-color: #ff4d4d;
+        }
+
+        form button:hover {
+            background-color: #ff1a1a;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>To-Do List</h1>
+        <form action="#" th:action="@{/todos}" method="post">
+            <input type="text" name="task" placeholder="New task" required>
+            <button type="submit">Add</button>
+        </form>
+        <ul>
+            <li th:each="todo : ${todos}">
+                <span th:text="${todo.task}"></span>
+                <span th:if="${todo.completed}">(Completed)</span>
+                <div>
+                    <form action="#" th:action="@{/todos/complete/{id}(id=${todo.id})}" method="post" th:if="${!todo.completed}">
+                        <button type="submit">Complete</button>
+                    </form>
+                    <form action="#" th:action="@{/todos/delete/{id}(id=${todo.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
